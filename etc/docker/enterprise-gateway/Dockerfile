@@ -1,6 +1,6 @@
 FROM jupyter/minimal-notebook
 
-ENV SPARK_VER 2.4.1
+ENV SPARK_VER 2.4.3
 ENV SPARK_HOME /opt/spark
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
@@ -35,11 +35,9 @@ RUN chown jovyan:users /usr/local/bin/start-enterprise-gateway.sh && \
 	rm -f /usr/local/bin/bootstrap-kernel.sh
 
 # Download and install Spark
-RUN curl -s https://archive.apache.org/dist/spark/spark-${SPARK_VER}/spark-${SPARK_VER}-bin-hadoop2.7.tgz | \
+RUN curl -s https://banzaicloud-spark-distro.s3-us-west-2.amazonaws.com/spark-${SPARK_VER}-bin-spark-v${SPARK_VER}.211.tgz | \
     tar -xz -C /opt && \
-    ln -s ${SPARK_HOME}-${SPARK_VER}-bin-hadoop2.7 $SPARK_HOME && \
-    mkdir -p /usr/hdp/current && \
-    ln -s ${SPARK_HOME}-${SPARK_VER}-bin-hadoop2.7 /usr/hdp/current/spark2-client
+    ln -s ${SPARK_HOME}-${SPARK_VER}-bin-spark-v${SPARK_VER}.211 $SPARK_HOME
 
 USER jovyan
 

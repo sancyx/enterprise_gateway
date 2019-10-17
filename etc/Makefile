@@ -10,7 +10,7 @@ ENV:=enterprise-gateway-dev
 SHELL:=/bin/bash
 
 # Docker attributes - hub organization and tag.  Modify accordingly
-HUB_ORG:=elyra
+HUB_ORG:=banzaicloud
 
 # Set NO_CACHE=--no-cache to force docker build to not use cached layers
 NO_CACHE?=
@@ -39,7 +39,7 @@ FILES_kernelspecs_all:=$(shell find kernel-launchers kernelspecs -type f -name '
 
 TOREE_LAUNCHER_FILES:=$(shell find kernel-launchers/scala/toree-launcher/src -type f -name '*')
 
-../build/kernelspecs: kernel-launchers/scala/lib  $(FILES_kernelspecs_all) 
+../build/kernelspecs: kernel-launchers/scala/lib  $(FILES_kernelspecs_all)
 	@rm -rf ../build/kernelspecs
 	@mkdir -p ../build/kernelspecs
     # Seed the build tree with initial files
@@ -169,4 +169,3 @@ push-$1:
 	docker push $(HUB_ORG)/$1:$(TAG)
 endef
 $(foreach image,$(PUSHED_IMAGES),$(eval $(call PUSH_IMAGE,$(image))))
-

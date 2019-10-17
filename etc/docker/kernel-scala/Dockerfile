@@ -1,4 +1,4 @@
-FROM elyra/spark:v2.4.1
+FROM banzaicloud/spark:v2.4.3.211
 
 ADD jupyter_enterprise_gateway_kernel_image_files*.tar.gz /usr/local/bin/
 
@@ -11,5 +11,3 @@ RUN adduser -S -u 1000 -G users jovyan && \
 USER jovyan
 ENV KERNEL_LANGUAGE scala
 CMD /usr/local/bin/bootstrap-kernel.sh
-
-
